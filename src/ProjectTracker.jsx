@@ -575,7 +575,7 @@ export default function ProjectTracker() {
 
   // ─── MAIN LAYOUT ───
   return (
-    <div style={{ fontFamily:"-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif", background:"#f8f9fb", color:"#1a1a2e", minHeight:"100vh", display:"flex" }}>
+    <div style={{ fontFamily:"-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif", background:"#f8f9fb", color:"#1a1a2e", height:"100vh", display:"flex", overflow:"hidden" }}>
       {/* Sidebar */}
       <div style={{ width:220, background:"#fff", borderRight:"1px solid #e5e7eb", display:"flex", flexDirection:"column", flexShrink:0 }}>
         <div style={{ padding:"20px 20px 16px", borderBottom:"1px solid #e5e7eb" }}>
