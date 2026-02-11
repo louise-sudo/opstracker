@@ -4,16 +4,16 @@ const initialProjects = [
   {
     id: 1,
     name: "Enablement",
-    category: "Produit & Industrie",
+    category: "Product & Industry",
     status: "In Progress",
     priority: "High",
     owner: "",
-    summary: "Enablement produit et industrie — structurer les ressources et processus pour accélérer l'adoption interne et la montée en compétences des équipes.",
+    summary: "Product and industry enablement — structure resources and processes to accelerate internal adoption and team upskilling.",
     tasks: [
-      { id: 1, text: "Mapper les besoins enablement par équipe", done: false, assignee: "" },
-      { id: 2, text: "Créer le playbook produit", done: false, assignee: "" },
-      { id: 3, text: "Organiser les sessions industry deep-dive", done: false, assignee: "" },
-      { id: 4, text: "Mettre en place le feedback loop", done: false, assignee: "" },
+      { id: 1, text: "Map enablement needs by team", done: false, assignee: "" },
+      { id: 2, text: "Create product playbook", done: false, assignee: "" },
+      { id: 3, text: "Organize industry deep-dive sessions", done: false, assignee: "" },
+      { id: 4, text: "Set up feedback loop", done: false, assignee: "" },
     ],
     dueDate: "2026-04-30",
     notes: "",
@@ -25,13 +25,13 @@ const initialProjects = [
     status: "Not Started",
     priority: "High",
     owner: "",
-    summary: "Mise en place du Trust Center, révision des T&Cs, centralisation des assets juridiques pour fluidifier le cycle de vente.",
+    summary: "Set up Trust Center, review T&Cs, centralize legal assets to streamline the sales cycle.",
     tasks: [
-      { id: 1, text: "Audit des T&Cs existants", done: false, assignee: "" },
-      { id: 2, text: "Benchmark des Trust Centers concurrents", done: false, assignee: "" },
-      { id: 3, text: "Sélection et setup de l'outil Trust Center", done: false, assignee: "" },
-      { id: 4, text: "Rédaction / mise à jour des documents légaux", done: false, assignee: "" },
-      { id: 5, text: "Go-live et communication interne", done: false, assignee: "" },
+      { id: 1, text: "Audit existing T&Cs", done: false, assignee: "" },
+      { id: 2, text: "Benchmark competitor Trust Centers", done: false, assignee: "" },
+      { id: 3, text: "Select and set up Trust Center tool", done: false, assignee: "" },
+      { id: 4, text: "Draft / update legal documents", done: false, assignee: "" },
+      { id: 5, text: "Go-live and internal communication", done: false, assignee: "" },
     ],
     dueDate: "2026-05-31",
     notes: "",
@@ -43,13 +43,13 @@ const initialProjects = [
     status: "In Progress",
     priority: "Medium",
     owner: "",
-    summary: "Automatiser la visualisation de la data consos/seats/workspaces et créer le deck upsell standardisé pour accélérer l'expansion revenue.",
+    summary: "Automate consumption/seats/workspaces data visualization and create a standardized upsell deck to accelerate expansion revenue.",
     tasks: [
-      { id: 1, text: "Définir les métriques clés (consos, seats, workspaces)", done: false, assignee: "" },
-      { id: 2, text: "Connecter les sources de données", done: false, assignee: "" },
-      { id: 3, text: "Créer le dashboard automatisé", done: false, assignee: "" },
-      { id: 4, text: "Designer le deck upsell template", done: false, assignee: "" },
-      { id: 5, text: "Tester sur 3 comptes pilotes", done: false, assignee: "" },
+      { id: 1, text: "Define key metrics (consumption, seats, workspaces)", done: false, assignee: "" },
+      { id: 2, text: "Connect data sources", done: false, assignee: "" },
+      { id: 3, text: "Build automated dashboard", done: false, assignee: "" },
+      { id: 4, text: "Design upsell deck template", done: false, assignee: "" },
+      { id: 5, text: "Test on 3 pilot accounts", done: false, assignee: "" },
     ],
     dueDate: "2026-03-31",
     notes: "",
@@ -61,12 +61,12 @@ const initialProjects = [
     status: "Not Started",
     priority: "Medium",
     owner: "",
-    summary: "Rationaliser et piloter les relations avec les fournisseurs de données — contrats, coûts, qualité, et roadmap d'intégration.",
+    summary: "Rationalize and manage data vendor relationships — contracts, costs, quality, and integration roadmap.",
     tasks: [
-      { id: 1, text: "Inventaire complet des vendors actuels", done: false, assignee: "" },
-      { id: 2, text: "Évaluation qualité / coût / overlap", done: false, assignee: "" },
-      { id: 3, text: "Négociation / renouvellement contrats", done: false, assignee: "" },
-      { id: 4, text: "Définir la gouvernance data vendors", done: false, assignee: "" },
+      { id: 1, text: "Complete inventory of current vendors", done: false, assignee: "" },
+      { id: 2, text: "Evaluate quality / cost / overlap", done: false, assignee: "" },
+      { id: 3, text: "Negotiate / renew contracts", done: false, assignee: "" },
+      { id: 4, text: "Define data vendors governance", done: false, assignee: "" },
     ],
     dueDate: "2026-06-30",
     notes: "",
@@ -87,18 +87,14 @@ const priorityConfig = {
 };
 
 const categoryIcons = {
-  "Produit & Industrie": "📦",
+  "Product & Industry": "📦",
   "Legal & Compliance": "⚖️",
   "Revenue Operations": "📈",
   "Procurement & Data": "🗄️",
 };
 
 const sidebarItems = [
-  { icon: "📊", label: "Dashboard", active: false },
-  { icon: "📋", label: "Chantiers", active: true },
-  { icon: "👥", label: "Équipe", active: false },
-  { icon: "📈", label: "Analytics", active: false },
-  { icon: "⚙️", label: "Settings", active: false },
+  { icon: "📋", label: "Projects", active: true },
 ];
 
 export default function ProjectTracker() {
@@ -212,7 +208,7 @@ export default function ProjectTracker() {
             <div style={{ width: 32, height: 32, borderRadius: 8, background: "linear-gradient(135deg, #6366f1, #8b5cf6)", display: "flex", alignItems: "center", justifyContent: "center", color: "#fff", fontSize: 14, fontWeight: 700 }}>S</div>
             <div>
               <div style={{ fontWeight: 600, fontSize: 14, color: "#111827" }}>Strategy & Ops</div>
-              <div style={{ fontSize: 11, color: "#9ca3af" }}>Chantiers transverses</div>
+              <div style={{ fontSize: 11, color: "#9ca3af" }}>Cross-functional projects</div>
             </div>
           </div>
         </div>
@@ -229,14 +225,14 @@ export default function ProjectTracker() {
           ))}
         </nav>
         <div style={{ padding: "16px", borderTop: "1px solid #e5e7eb" }}>
-          <div style={{ fontSize: 11, color: "#9ca3af", marginBottom: 6 }}>Progression globale</div>
+          <div style={{ fontSize: 11, color: "#9ca3af", marginBottom: 6 }}>Overall progress</div>
           <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
             <div style={{ flex: 1, height: 6, background: "#e5e7eb", borderRadius: 3, overflow: "hidden" }}>
               <div style={{ height: "100%", width: `${totalTasks ? Math.round(doneTasks / totalTasks * 100) : 0}%`, background: "linear-gradient(90deg, #6366f1, #8b5cf6)", borderRadius: 3, transition: "width 0.4s" }} />
             </div>
             <span style={{ fontSize: 12, fontWeight: 600, color: "#374151" }}>{totalTasks ? Math.round(doneTasks / totalTasks * 100) : 0}%</span>
           </div>
-          <div style={{ fontSize: 11, color: "#9ca3af", marginTop: 4 }}>{doneTasks}/{totalTasks} tâches complétées</div>
+          <div style={{ fontSize: 11, color: "#9ca3af", marginTop: 4 }}>{doneTasks}/{totalTasks} tasks completed</div>
         </div>
       </div>
 
@@ -246,7 +242,7 @@ export default function ProjectTracker() {
         {/* Top bar */}
         <div style={{ background: "#fff", borderBottom: "1px solid #e5e7eb", padding: "14px 24px", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
           <div style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 14, color: "#6b7280" }}>
-            <span style={{ fontWeight: 600, color: "#111827" }}>Chantiers</span>
+            <span style={{ fontWeight: 600, color: "#111827" }}>Projects</span>
             <span>›</span>
             <span>All ({projects.length})</span>
           </div>
@@ -263,7 +259,7 @@ export default function ProjectTracker() {
             </select>
             <button onClick={() => setShowAddProject(true)}
               style={{ padding: "7px 16px", background: "#6366f1", color: "#fff", border: "none", borderRadius: 8, fontSize: 13, fontWeight: 500, cursor: "pointer", display: "flex", alignItems: "center", gap: 6 }}>
-              <span style={{ fontSize: 16 }}>+</span> Nouveau chantier
+              <span style={{ fontSize: 16 }}>+</span> New Project
             </button>
           </div>
         </div>
@@ -273,25 +269,25 @@ export default function ProjectTracker() {
           <div style={{ position: "fixed", inset: 0, background: "rgba(0,0,0,0.3)", zIndex: 100, display: "flex", alignItems: "center", justifyContent: "center" }}
             onClick={(e) => { if (e.target === e.currentTarget) setShowAddProject(false); }}>
             <div style={{ background: "#fff", borderRadius: 16, padding: 28, width: 440, boxShadow: "0 20px 60px rgba(0,0,0,0.15)" }}>
-              <h3 style={{ margin: "0 0 20px", fontSize: 18, fontWeight: 600, color: "#111827" }}>Nouveau chantier</h3>
+              <h3 style={{ margin: "0 0 20px", fontSize: 18, fontWeight: 600, color: "#111827" }}>New Project</h3>
               <div style={{ marginBottom: 14 }}>
-                <label style={{ fontSize: 12, fontWeight: 500, color: "#6b7280", display: "block", marginBottom: 4 }}>Nom</label>
-                <input value={newProject.name} onChange={(e) => setNewProject({ ...newProject, name: e.target.value })} placeholder="Ex: Enablement produit" autoFocus
+                <label style={{ fontSize: 12, fontWeight: 500, color: "#6b7280", display: "block", marginBottom: 4 }}>Name</label>
+                <input value={newProject.name} onChange={(e) => setNewProject({ ...newProject, name: e.target.value })} placeholder="E.g. Product Enablement" autoFocus
                   style={{ width: "100%", padding: "10px 14px", border: "1px solid #e5e7eb", borderRadius: 8, fontSize: 14, outline: "none", boxSizing: "border-box" }} />
               </div>
               <div style={{ marginBottom: 14 }}>
-                <label style={{ fontSize: 12, fontWeight: 500, color: "#6b7280", display: "block", marginBottom: 4 }}>Catégorie</label>
-                <input value={newProject.category} onChange={(e) => setNewProject({ ...newProject, category: e.target.value })} placeholder="Ex: Revenue Operations"
+                <label style={{ fontSize: 12, fontWeight: 500, color: "#6b7280", display: "block", marginBottom: 4 }}>Category</label>
+                <input value={newProject.category} onChange={(e) => setNewProject({ ...newProject, category: e.target.value })} placeholder="E.g. Revenue Operations"
                   style={{ width: "100%", padding: "10px 14px", border: "1px solid #e5e7eb", borderRadius: 8, fontSize: 14, outline: "none", boxSizing: "border-box" }} />
               </div>
               <div style={{ marginBottom: 20 }}>
-                <label style={{ fontSize: 12, fontWeight: 500, color: "#6b7280", display: "block", marginBottom: 4 }}>Résumé</label>
-                <textarea value={newProject.summary} onChange={(e) => setNewProject({ ...newProject, summary: e.target.value })} rows={3} placeholder="Description du chantier..."
+                <label style={{ fontSize: 12, fontWeight: 500, color: "#6b7280", display: "block", marginBottom: 4 }}>Summary</label>
+                <textarea value={newProject.summary} onChange={(e) => setNewProject({ ...newProject, summary: e.target.value })} rows={3} placeholder="Project description..."
                   style={{ width: "100%", padding: "10px 14px", border: "1px solid #e5e7eb", borderRadius: 8, fontSize: 14, outline: "none", resize: "vertical", fontFamily: "inherit", boxSizing: "border-box" }} />
               </div>
               <div style={{ display: "flex", gap: 10, justifyContent: "flex-end" }}>
-                <button onClick={() => setShowAddProject(false)} style={{ padding: "9px 20px", background: "#f3f4f6", color: "#374151", border: "none", borderRadius: 8, fontSize: 13, cursor: "pointer" }}>Annuler</button>
-                <button onClick={addProject} style={{ padding: "9px 20px", background: "#6366f1", color: "#fff", border: "none", borderRadius: 8, fontSize: 13, fontWeight: 500, cursor: "pointer" }}>Créer</button>
+                <button onClick={() => setShowAddProject(false)} style={{ padding: "9px 20px", background: "#f3f4f6", color: "#374151", border: "none", borderRadius: 8, fontSize: 13, cursor: "pointer" }}>Cancel</button>
+                <button onClick={addProject} style={{ padding: "9px 20px", background: "#6366f1", color: "#fff", border: "none", borderRadius: 8, fontSize: 13, fontWeight: 500, cursor: "pointer" }}>Create</button>
               </div>
             </div>
           </div>
@@ -304,16 +300,16 @@ export default function ProjectTracker() {
               <thead>
                 <tr style={{ background: "#f9fafb", borderBottom: "1px solid #e5e7eb" }}>
                   <th style={{ padding: "10px 24px", textAlign: "left", fontWeight: 500, fontSize: 12, color: "#6b7280", textTransform: "uppercase", letterSpacing: 0.5, cursor: "pointer", userSelect: "none" }} onClick={() => handleSort("name")}>
-                    Chantier <SortIcon field="name" />
+                    Project <SortIcon field="name" />
                   </th>
                   <th style={{ padding: "10px 16px", textAlign: "left", fontWeight: 500, fontSize: 12, color: "#6b7280", textTransform: "uppercase", letterSpacing: 0.5, cursor: "pointer", userSelect: "none" }} onClick={() => handleSort("status")}>
                     Status <SortIcon field="status" />
                   </th>
                   <th style={{ padding: "10px 16px", textAlign: "left", fontWeight: 500, fontSize: 12, color: "#6b7280", textTransform: "uppercase", letterSpacing: 0.5, cursor: "pointer", userSelect: "none" }} onClick={() => handleSort("category")}>
-                    Catégorie <SortIcon field="category" />
+                    Category <SortIcon field="category" />
                   </th>
                   <th style={{ padding: "10px 16px", textAlign: "left", fontWeight: 500, fontSize: 12, color: "#6b7280", textTransform: "uppercase", letterSpacing: 0.5, cursor: "pointer", userSelect: "none" }} onClick={() => handleSort("priority")}>
-                    Priorité <SortIcon field="priority" />
+                    Priority <SortIcon field="priority" />
                   </th>
                   <th style={{ padding: "10px 16px", textAlign: "left", fontWeight: 500, fontSize: 12, color: "#6b7280", textTransform: "uppercase", letterSpacing: 0.5 }}>Owner</th>
                   <th style={{ padding: "10px 16px", textAlign: "left", fontWeight: 500, fontSize: 12, color: "#6b7280", textTransform: "uppercase", letterSpacing: 0.5, cursor: "pointer", userSelect: "none" }} onClick={() => handleSort("progress")}>
@@ -370,7 +366,7 @@ export default function ProjectTracker() {
                         </div>
                       </td>
                       <td style={{ padding: "14px 16px", fontSize: 13, color: "#6b7280" }}>
-                        {project.dueDate ? new Date(project.dueDate).toLocaleDateString("fr-FR", { day: "numeric", month: "short", year: "numeric" }) : "—"}
+                        {project.dueDate ? new Date(project.dueDate).toLocaleDateString("en-US", { day: "numeric", month: "short", year: "numeric" }) : "—"}
                       </td>
                     </tr>
                   );
@@ -378,7 +374,7 @@ export default function ProjectTracker() {
               </tbody>
             </table>
             {filtered.length === 0 && (
-              <div style={{ textAlign: "center", padding: 40, color: "#9ca3af", fontSize: 14 }}>Aucun chantier trouvé</div>
+              <div style={{ textAlign: "center", padding: 40, color: "#9ca3af", fontSize: 14 }}>No projects found</div>
             )}
           </div>
 
@@ -407,7 +403,7 @@ export default function ProjectTracker() {
                     style={{ padding: "5px 10px", border: "1px solid #e5e7eb", borderRadius: 8, fontSize: 12, color: "#374151", outline: "none" }} />
                   <button onClick={() => deleteProject(current.id)}
                     style={{ padding: "5px 10px", border: "1px solid #fecaca", borderRadius: 8, fontSize: 12, color: "#dc2626", background: "#fef2f2", cursor: "pointer", marginLeft: "auto" }}>
-                    Supprimer
+                    Delete
                   </button>
                 </div>
 
@@ -422,14 +418,14 @@ export default function ProjectTracker() {
                       style={{ padding: "8px 12px", border: "1px solid #f3f4f6", borderRadius: 8, fontSize: 13, color: current.owner ? "#111827" : "#d1d5db", cursor: "pointer", transition: "border 0.15s" }}
                       onMouseEnter={(e) => e.currentTarget.style.borderColor = "#e5e7eb"}
                       onMouseLeave={(e) => e.currentTarget.style.borderColor = "#f3f4f6"}>
-                      {current.owner || "Cliquer pour assigner..."}
+                      {current.owner || "Click to assign..."}
                     </div>
                   )}
                 </div>
 
                 {/* Summary */}
                 <div style={{ marginBottom: 18 }}>
-                  <div style={{ fontSize: 11, fontWeight: 500, color: "#9ca3af", textTransform: "uppercase", letterSpacing: 0.5, marginBottom: 6 }}>Résumé</div>
+                  <div style={{ fontSize: 11, fontWeight: 500, color: "#9ca3af", textTransform: "uppercase", letterSpacing: 0.5, marginBottom: 6 }}>Summary</div>
                   {editingField === "summary" ? (
                     <textarea value={tempValue} onChange={(e) => setTempValue(e.target.value)} onBlur={() => saveEdit(current.id, "summary")} rows={3} autoFocus
                       style={{ width: "100%", padding: "8px 12px", border: "1px solid #e5e7eb", borderRadius: 8, fontSize: 13, lineHeight: 1.5, outline: "none", resize: "vertical", fontFamily: "inherit", boxSizing: "border-box" }} />
@@ -438,7 +434,7 @@ export default function ProjectTracker() {
                       style={{ padding: "8px 12px", border: "1px solid #f3f4f6", borderRadius: 8, fontSize: 13, lineHeight: 1.5, color: current.summary ? "#374151" : "#d1d5db", cursor: "pointer", transition: "border 0.15s" }}
                       onMouseEnter={(e) => e.currentTarget.style.borderColor = "#e5e7eb"}
                       onMouseLeave={(e) => e.currentTarget.style.borderColor = "#f3f4f6"}>
-                      {current.summary || "Ajouter un résumé..."}
+                      {current.summary || "Add a summary..."}
                     </div>
                   )}
                 </div>
@@ -447,7 +443,7 @@ export default function ProjectTracker() {
                 <div style={{ marginBottom: 18 }}>
                   <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 10 }}>
                     <div style={{ fontSize: 11, fontWeight: 500, color: "#9ca3af", textTransform: "uppercase", letterSpacing: 0.5 }}>
-                      Tâches ({current.tasks.filter(t => t.done).length}/{current.tasks.length})
+                      Tasks ({current.tasks.filter(t => t.done).length}/{current.tasks.length})
                     </div>
                     <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
                       <div style={{ width: 50, height: 4, background: "#e5e7eb", borderRadius: 2, overflow: "hidden" }}>
@@ -478,7 +474,7 @@ export default function ProjectTracker() {
 
                   {showAddTask ? (
                     <div style={{ display: "flex", gap: 8, marginTop: 8 }}>
-                      <input value={newTaskText} onChange={(e) => setNewTaskText(e.target.value)} onKeyDown={(e) => e.key === "Enter" && addTask(current.id)} placeholder="Nouvelle tâche..." autoFocus
+                      <input value={newTaskText} onChange={(e) => setNewTaskText(e.target.value)} onKeyDown={(e) => e.key === "Enter" && addTask(current.id)} placeholder="New task..." autoFocus
                         style={{ flex: 1, padding: "8px 12px", border: "1px solid #e5e7eb", borderRadius: 8, fontSize: 13, outline: "none" }} />
                       <button onClick={() => addTask(current.id)} style={{ padding: "8px 14px", background: "#6366f1", color: "#fff", border: "none", borderRadius: 8, fontSize: 12, fontWeight: 500, cursor: "pointer" }}>+</button>
                       <button onClick={() => { setShowAddTask(false); setNewTaskText(""); }} style={{ padding: "8px 12px", background: "#f3f4f6", color: "#6b7280", border: "none", borderRadius: 8, fontSize: 12, cursor: "pointer" }}>✕</button>
@@ -488,7 +484,7 @@ export default function ProjectTracker() {
                       style={{ padding: "8px 10px", marginTop: 4, borderRadius: 8, color: "#9ca3af", fontSize: 12, cursor: "pointer" }}
                       onMouseEnter={(e) => e.currentTarget.style.color = "#6366f1"}
                       onMouseLeave={(e) => e.currentTarget.style.color = "#9ca3af"}>
-                      + Ajouter une tâche
+                      + Add a task
                     </div>
                   )}
                 </div>
@@ -504,7 +500,7 @@ export default function ProjectTracker() {
                       style={{ padding: "8px 12px", border: "1px solid #f3f4f6", borderRadius: 8, fontSize: 13, lineHeight: 1.5, color: current.notes ? "#374151" : "#d1d5db", cursor: "pointer", minHeight: 60, whiteSpace: "pre-wrap", transition: "border 0.15s" }}
                       onMouseEnter={(e) => e.currentTarget.style.borderColor = "#e5e7eb"}
                       onMouseLeave={(e) => e.currentTarget.style.borderColor = "#f3f4f6"}>
-                      {current.notes || "Ajouter des notes..."}
+                      {current.notes || "Add notes..."}
                     </div>
                   )}
                 </div>
