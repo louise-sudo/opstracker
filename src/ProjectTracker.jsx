@@ -2,6 +2,7 @@ import { useState } from "react";
 
 const defaultCategories = ["Product & Industry", "Legal & Compliance", "Revenue Operations", "Procurement & Data"];
 const defaultMembers = [];
+const okrTeams = ["Sales", "Marketing", "Product", "Solutions Consulting", "Finance", "Corporate", "HR"];
 
 const initialProjects = [
   { id: 1, name: "Enablement", category: "Product & Industry", status: "In Progress", priority: "High", owner: "", link: "",
@@ -76,6 +77,11 @@ export default function ProjectTracker() {
   const [editMemberValue, setEditMemberValue] = useState("");
   const [newOkr, setNewOkr] = useState("");
   const [showAddOkr, setShowAddOkr] = useState(false);
+  const [newOkrTeam, setNewOkrTeam] = useState("");
+  const [editingOkrId, setEditingOkrId] = useState(null);
+  const [editOkrText, setEditOkrText] = useState("");
+  const [editingName, setEditingName] = useState(false);
+  const [editNameValue, setEditNameValue] = useState("");
 
   const updateProject = (id, field, value) => {
     setProjects(prev => prev.map(p => p.id === id ? { ...p, [field]: value } : p));
@@ -116,11 +122,21 @@ export default function ProjectTracker() {
   };
   const addOkr = (pid) => {
     if (!newOkr.trim()) return;
-    const o = { id: Date.now(), text: newOkr.trim() };
+    const o = { id: Date.now(), text: newOkr.trim(), team: newOkrTeam };
     const up = p => p.id === pid ? { ...p, okrs: [...(p.okrs||[]), o] } : p;
     setProjects(prev => prev.map(up));
     if (selectedProject?.id === pid) setSelectedProject(prev => up(prev));
-    setNewOkr(""); setShowAddOkr(false);
+    setNewOkr(""); setNewOkrTeam(""); setShowAddOkr(false);
+  };
+  const updateOkrText = (pid, oid, text) => {
+    const up = p => p.id === pid ? { ...p, okrs: (p.okrs||[]).map(o => o.id === oid ? { ...o, text } : o) } : p;
+    setProjects(prev => prev.map(up));
+    if (selectedProject?.id === pid) setSelectedProject(prev => up(prev));
+  };
+  const updateOkrTeam = (pid, oid, team) => {
+    const up = p => p.id === pid ? { ...p, okrs: (p.okrs||[]).map(o => o.id === oid ? { ...o, team } : o) } : p;
+    setProjects(prev => prev.map(up));
+    if (selectedProject?.id === pid) setSelectedProject(prev => up(prev));
   };
   const deleteOkr = (pid, oid) => {
     const up = p => p.id === pid ? { ...p, okrs: (p.okrs||[]).filter(o => o.id !== oid) } : p;
@@ -351,15 +367,23 @@ export default function ProjectTracker() {
 
         {/* ─── DETAIL PANEL ─── */}
         {current && (
-          <div style={{ width:420, borderLeft:"1px solid #e5e7eb", background:"#fff", overflow:"auto", flexShrink:0 }}>
-            <div style={{ padding:"20px 24px", borderBottom:"1px solid #e5e7eb", display:"flex", justifyContent:"space-between", alignItems:"flex-start" }}>
+          <div style={{ width:420, borderLeft:"1px solid #e5e7eb", background:"#fff", overflow:"hidden", flexShrink:0, display:"flex", flexDirection:"column" }}>
+            <div style={{ padding:"20px 24px", borderBottom:"1px solid #e5e7eb", display:"flex", justifyContent:"space-between", alignItems:"flex-start", flexShrink:0 }}>
               <div>
                 <div style={{ fontSize:11, color:"#9ca3af", textTransform:"uppercase", letterSpacing:1, marginBottom:4 }}>{current.category}</div>
-                <h2 style={{ margin:0, fontSize:18, fontWeight:600, color:"#111827" }}>{current.name}</h2>
+                {editingName ? (
+                  <input value={editNameValue} onChange={e=>setEditNameValue(e.target.value)} autoFocus
+                    onBlur={()=>{if(editNameValue.trim())updateProject(current.id,"name",editNameValue.trim());setEditingName(false);}}
+                    onKeyDown={e=>{if(e.key==="Enter"){if(editNameValue.trim())updateProject(current.id,"name",editNameValue.trim());setEditingName(false);}if(e.key==="Escape")setEditingName(false);}}
+                    style={{ margin:0, fontSize:18, fontWeight:600, color:"#111827", border:"1px solid #e5e7eb", borderRadius:6, padding:"2px 8px", outline:"none", width:"100%", boxSizing:"border-box", fontFamily:"inherit" }} />
+                ) : (
+                  <h2 onClick={()=>{setEditingName(true);setEditNameValue(current.name);}} style={{ margin:0, fontSize:18, fontWeight:600, color:"#111827", cursor:"pointer", borderRadius:6, padding:"2px 4px", marginLeft:-4, transition:"background 0.15s" }}
+                    onMouseEnter={e=>e.currentTarget.style.background="#f3f4f6"} onMouseLeave={e=>e.currentTarget.style.background="transparent"}>{current.name}</h2>
+                )}
               </div>
               <button onClick={()=>setSelectedProject(null)} style={{ background:"#f3f4f6", border:"none", borderRadius:6, padding:"6px 10px", cursor:"pointer", fontSize:12, color:"#6b7280" }}>✕</button>
             </div>
-            <div style={{ padding:"20px 24px" }}>
+            <div style={{ padding:"20px 24px", overflow:"auto", flex:1 }}>
               {/* Meta row */}
               <div style={{ display:"flex", gap:8, marginBottom:20, flexWrap:"wrap" }}>
                 <select value={current.status} onChange={e=>updateProject(current.id,"status",e.target.value)}
@@ -437,21 +461,44 @@ export default function ProjectTracker() {
                   <span style={{ background:"#f0f0ff", color:"#6366f1", padding:"1px 8px", borderRadius:10, fontSize:11, fontWeight:500 }}>{(current.okrs||[]).length}</span>
                 </div>
                 {(current.okrs||[]).map(okr=>(
-                  <div key={okr.id} style={{ display:"flex", alignItems:"flex-start", gap:8, padding:"8px 10px", marginBottom:2, borderRadius:8 }}
+                  <div key={okr.id} style={{ display:"flex", alignItems:"flex-start", gap:8, padding:"8px 10px", marginBottom:4, borderRadius:8 }}
                     onMouseEnter={e=>e.currentTarget.style.background="#f9fafb"} onMouseLeave={e=>e.currentTarget.style.background="transparent"}>
                     <span style={{ color:"#6366f1", fontSize:14, marginTop:1, flexShrink:0 }}>◎</span>
-                    <span style={{ flex:1, fontSize:13, color:"#374151", lineHeight:1.4 }}>{okr.text}</span>
+                    <div style={{ flex:1, minWidth:0 }}>
+                      {editingOkrId===okr.id ? (
+                        <input value={editOkrText} onChange={e=>setEditOkrText(e.target.value)} autoFocus
+                          onBlur={()=>{if(editOkrText.trim())updateOkrText(current.id,okr.id,editOkrText.trim());setEditingOkrId(null);}}
+                          onKeyDown={e=>{if(e.key==="Enter"){if(editOkrText.trim())updateOkrText(current.id,okr.id,editOkrText.trim());setEditingOkrId(null);}if(e.key==="Escape")setEditingOkrId(null);}}
+                          style={{ width:"100%", padding:"2px 6px", border:"1px solid #e5e7eb", borderRadius:4, fontSize:13, outline:"none", boxSizing:"border-box" }} />
+                      ) : (
+                        <span onClick={()=>{setEditingOkrId(okr.id);setEditOkrText(okr.text);}} style={{ fontSize:13, color:"#374151", lineHeight:1.4, cursor:"pointer" }}>{okr.text}</span>
+                      )}
+                      <div style={{ marginTop:4, display:"flex", alignItems:"center", gap:6 }}>
+                        <select value={okr.team||""} onChange={e=>updateOkrTeam(current.id,okr.id,e.target.value)}
+                          style={{ padding:"1px 6px", border:"1px solid #e5e7eb", borderRadius:4, fontSize:10, color:okr.team?"#6366f1":"#9ca3af", background:okr.team?"#f0f0ff":"#fff", outline:"none", cursor:"pointer" }}>
+                          <option value="">No team</option>
+                          {okrTeams.map(t=><option key={t} value={t}>{t}</option>)}
+                        </select>
+                      </div>
+                    </div>
                     <span onClick={()=>deleteOkr(current.id,okr.id)} style={{ color:"#d1d5db", cursor:"pointer", fontSize:14, padding:"0 2px", flexShrink:0 }}
                       onMouseEnter={e=>e.currentTarget.style.color="#ef4444"} onMouseLeave={e=>e.currentTarget.style.color="#d1d5db"}>×</span>
                   </div>
                 ))}
                 {(current.okrs||[]).length===0 && !showAddOkr && <div style={{ padding:"8px 10px", color:"#d1d5db", fontSize:13 }}>No linked OKRs yet</div>}
                 {showAddOkr ? (
-                  <div style={{ display:"flex", gap:8, marginTop:6 }}>
-                    <input value={newOkr} onChange={e=>setNewOkr(e.target.value)} onKeyDown={e=>e.key==="Enter"&&addOkr(current.id)} placeholder="E.g. Increase NRR to 120% by Q2" autoFocus
-                      style={{ flex:1, padding:"8px 12px", border:"1px solid #e5e7eb", borderRadius:8, fontSize:13, outline:"none" }} />
-                    <button onClick={()=>addOkr(current.id)} style={{ padding:"8px 14px", background:"#6366f1", color:"#fff", border:"none", borderRadius:8, fontSize:12, fontWeight:500, cursor:"pointer" }}>+</button>
-                    <button onClick={()=>{setShowAddOkr(false);setNewOkr("");}} style={{ padding:"8px 12px", background:"#f3f4f6", color:"#6b7280", border:"none", borderRadius:8, fontSize:12, cursor:"pointer" }}>✕</button>
+                  <div style={{ marginTop:6 }}>
+                    <div style={{ display:"flex", gap:8 }}>
+                      <input value={newOkr} onChange={e=>setNewOkr(e.target.value)} onKeyDown={e=>e.key==="Enter"&&addOkr(current.id)} placeholder="E.g. Increase NRR to 120% by Q2" autoFocus
+                        style={{ flex:1, padding:"8px 12px", border:"1px solid #e5e7eb", borderRadius:8, fontSize:13, outline:"none" }} />
+                      <button onClick={()=>addOkr(current.id)} style={{ padding:"8px 14px", background:"#6366f1", color:"#fff", border:"none", borderRadius:8, fontSize:12, fontWeight:500, cursor:"pointer" }}>+</button>
+                      <button onClick={()=>{setShowAddOkr(false);setNewOkr("");setNewOkrTeam("");}} style={{ padding:"8px 12px", background:"#f3f4f6", color:"#6b7280", border:"none", borderRadius:8, fontSize:12, cursor:"pointer" }}>✕</button>
+                    </div>
+                    <select value={newOkrTeam} onChange={e=>setNewOkrTeam(e.target.value)}
+                      style={{ marginTop:6, padding:"5px 10px", border:"1px solid #e5e7eb", borderRadius:6, fontSize:12, color:newOkrTeam?"#6366f1":"#9ca3af", background:newOkrTeam?"#f0f0ff":"#fff", outline:"none", cursor:"pointer" }}>
+                      <option value="">Assign team (optional)</option>
+                      {okrTeams.map(t=><option key={t} value={t}>{t}</option>)}
+                    </select>
                   </div>
                 ) : (
                   <div onClick={()=>setShowAddOkr(true)} style={{ padding:"8px 10px", marginTop:4, borderRadius:8, color:"#9ca3af", fontSize:12, cursor:"pointer" }}
